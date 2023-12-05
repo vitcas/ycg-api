@@ -6,9 +6,8 @@ import json
 
 app = Flask(__name__)
 CORS(app)
-
-#mongo_uri = 'mongodb+srv://pixewin621:ovJNAOJLYEnk8SOE@cluster0.6qnu0z7.mongodb.net/?retryWrites=true&w=majority'   
-mongo_uri = 'mongodb+srv://sora:Ue29WzfsCBJWXT7P@cluster0.6qnu0z7.mongodb.net/?retryWrites=true&w=majority' 
+ 
+mongo_uri = 'mongodb+srv://user:pwd@cluster0.6qnu0z7.mongodb.net/?retryWrites=true&w=majority' 
 db_name = 'youkaicg'
 collection_name = 'cards'
 
