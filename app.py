@@ -17,7 +17,7 @@ collection = db[collection_name]
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return jsonify({'message': 'ok'})
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
