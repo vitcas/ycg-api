@@ -1,5 +1,7 @@
 # ycg-api
 
+ask for my mongodb access at https://discord.gg/JfhUy5TsvQ
+
 how to
 
 ```bash
