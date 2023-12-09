@@ -40,7 +40,7 @@ def get_alters():
     results = list(collection.find({"alt_arts": {"$exists": True}}))
     return json.loads(json_util.dumps(results))
 
-@app.route('/api/youkaicg/code/<code_part>', methods=['GET'])
+@app.route('/api/booster/<code_part>', methods=['GET'])
 def get_documents_by_code_part(code_part):
     try:
         query = {'cardnumber': {'$regex': f'.*{code_part}.*'}}
@@ -52,7 +52,7 @@ def get_documents_by_code_part(code_part):
     except errors.PyMongoError as e:
         return jsonify({'error': f'Erro de banco de dados: {str(e)}'}), 500
 
-@app.route('/api/youkaicg/keyword/<key>', methods=['GET'])
+@app.route('/api/keyword/<key>', methods=['GET'])
 def get_documents_by_keyword(key):
     try:
         query = {'keywords':key}
@@ -64,7 +64,7 @@ def get_documents_by_keyword(key):
     except errors.PyMongoError as e:
         return jsonify({'error': f'Erro de banco de dados: {str(e)}'}), 500
 
-@app.route('/api/youkaicg/wizard', methods=['GET'])
+@app.route('/api/wizard', methods=['GET'])
 def get_wizard_deck():
     color = request.args.get('color')
     key = request.args.get('key')
@@ -78,7 +78,7 @@ def get_wizard_deck():
     except errors.PyMongoError as e:
         return jsonify({'error': f'Erro de banco de dados: {str(e)}'}), 500
 
-@app.route('/api/youkaicg/<cardnumber>', methods=['GET'])
+@app.route('/api/card/<cardnumber>', methods=['GET'])
 def get_document_by_cardnumber(cardnumber):
     try:
         result = collection.find_one({'cardnumber': cardnumber})   
@@ -88,19 +88,6 @@ def get_document_by_cardnumber(cardnumber):
             return jsonify({'error': 'Documento não encontrado'}), 404
     except errors.PyMongoError as e:
         return jsonify({'error': f'Erro de banco de dados: {str(e)}'}), 500
-
-@app.route('/api/hello', methods=['GET'])
-def hello():
-    return jsonify({'message': 'Hello, world!'})
-
-@app.route('/api/greet', methods=['POST'])
-def greet():
-    data = request.get_json()
-
-    if 'name' in data:
-        return jsonify({'message': f'Hello, {data["name"]}!'})
-    else:
-        return jsonify({'error': 'Name not provided'}), 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000,debug=True)
